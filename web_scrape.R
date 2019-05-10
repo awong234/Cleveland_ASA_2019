@@ -52,11 +52,13 @@ getAddr = function(code){
     htmlParse %>% 
     xpathSApply(path = "//*/span[@itemprop='streetAddress']",
                 xmlValue)
-  }, error = function(m){message(m); return(NULL)}
+  }, error = function(m){message(m); return(NA)}
   )
   
   return(item)
 }
 
-sapply(X = all_codes, FUN = getAddr)
+addr = sapply(X = all_codes, FUN = getAddr)
 
+# Same as before
+addr['cuva']
