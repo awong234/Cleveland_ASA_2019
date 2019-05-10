@@ -25,9 +25,12 @@ getURL(url = url_text) %>%
 
 url_ref = "https://www.nps.gov/findapark/index.htm"
 
+
+# The @class or @id etc. works interchangeably and order, as long as it
+# identifies the group properly
 all_codes = getURL(url = url_ref) %>% 
   htmlParse %>% 
-  xpathSApply(path = "//*/select[@id='alphacode']/optgroup/option",
+  xpathSApply(path = "//*/select[@class=' js-multiselect-findapark']/optgroup/option",
               xmlGetAttr, "value")
 
 all_codes
@@ -56,3 +59,4 @@ getAddr = function(code){
 }
 
 sapply(X = all_codes, FUN = getAddr)
+
